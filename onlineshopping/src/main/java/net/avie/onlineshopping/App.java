@@ -1,4 +1,4 @@
-package net.avie.shoppingbackend;
+package net.avie.onlineshopping;
 
 /**
  * Hello world!

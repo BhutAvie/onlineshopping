@@ -8,26 +8,41 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc.xsd
-	
-	">
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<context:component-scan base-package="net.avie.onlineshopping.controller"/>
-	
-	
+
+	<context:component-scan
+		base-package="net.avie.onlineshopping.controller" />
+	<context:component-scan
+		base-package="jbr.springmvc" />
+
+	<context:annotation-config />
+	<bean id="userService"
+		class="net.avie.onlineshopping.service.UserServiceImpl" />
+	<bean id="UserDao"
+		class="net.avie.onlineshopping.daoimpl.UserDaoImpl " />
+	<bean id="JbdcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="datasource" />
+	</bean>
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		
-		<property name="prefix" value="/WEB-INF/views/" />
-		<property name="suffix" value=".jsp" />
-		
-	</bean>
-	
-	
+			<property name="prefix" value="/WEB-INF/views/" />
+			<property name="suffix" value=".jsp" />
+			<property name="diverClassName" value="org.h2.Driver" />
+			<property name="url" value="jdbc:h2:./onlineshopping" />
+			<property name="username" value="admin" />
+			<property name="password" value="admin" />
+
+		</bean>
+
+
 	<!-- Loading static resources -->
 	<mvc:annotation-driven />
-	
-	<mvc:resources location="/assets/" mapping="/resources/**" />
-	
+
+	<mvc:resources location="/assets/"
+		mapping="/resources/**" />
+
 
 </beans>
